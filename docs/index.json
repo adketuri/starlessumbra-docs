@@ -1,0 +1,291 @@
+{
+    "activate_switch": {
+        "description": "Activates or deactivates a wall switch",
+        "tags": [
+            "wall switch"
+        ],
+        "params": [
+            {
+                "name": "Instance",
+                "type": "instance",
+                "description": "The instance to turn on."
+            },
+            {
+                "name": "Active",
+                "type": "boolean",
+                "description": "Whether or not the switch is being turned on."
+            }
+        ]
+    },
+    "add_exp": {
+        "description": "Adds exp to the entire party",
+        "tags": [
+            "exp"
+        ],
+        "params": [
+            {
+                "name": "Amount",
+                "type": "Number",
+                "description": "The amount of exp to give to each party member."
+            }
+        ]
+    },
+    "animation": {
+        "description": "Displays an animated sprite sequence.",
+        "tags": [
+            "animation"
+        ],
+        "params": [
+            {
+                "name": "Target",
+                "type": "instance",
+                "description": "The target instance to receive the animation."
+            },
+            {
+                "name": "Animation",
+                "type": "asset",
+                "description": "The animation sprite asset."
+            },
+            {
+                "name": "Rotate",
+                "type": "boolean",
+                "description": "Whether or not to rotate the sprite, based on the instance's facing direction. Primarily for 4-direction animations.",
+                "default_value": false,
+                "optional": true
+            },
+            {
+                "name": "Layer",
+                "type": "string",
+                "description": "Specifies a layer to display the animation. Typically will be 'Instances', 'Upper_Instances', or 'HUD'.",
+                "default_value": "Instances",
+                "optional": true
+            },
+            {
+                "name": "Follow",
+                "type": "boolean",
+                "description": "Determines whether or not the animation follows the instance.",
+                "default_value": false,
+                "optional": true
+            }
+        ]
+    },
+    "animation_stop": {
+        "description": "Stops an instance replaced with an animation from the animation_replace command. See animation_replace for details.",
+        "tags": [
+            "animation"
+        ],
+        "params": [
+            {
+                "name": "target",
+                "type": "instance",
+                "description": "The target instance to stop animations on."
+            }
+        ]
+    },
+    "animation_replace": {
+        "description": "Renders an animation instead of an instance for the duration of playback. For looped animations, animation_stop must be explicitly called to stop the replacement animation.",
+        "tags": [
+            "animation"
+        ],
+        "params": [
+            {
+                "name": "target",
+                "type": "instance",
+                "description": "The target instance to stop animations on."
+            },
+            {
+                "name": "Animation",
+                "type": "asset",
+                "description": "The animation sprite asset."
+            },
+            {
+                "name": "Special Operation 1",
+                "type": "string",
+                "optional": true,
+                "description": "An optional operation to add to the replacement. 'target_flip' flips the animation in the x axis depending on the receiving and replacing instances' x positions. 'loop', 'follow', 'keep_last' are self-explanatory. lastly, there's a special catch all to do other interesting things 'destroy=<instance>' can be used to destroy some other unrelated instance while the animation starts."
+            },
+            {
+                "name": "Special Operation 2",
+                "type": "string",
+                "optional": true,
+                "description": "See Special Operation 1."
+            }
+        ]
+    },
+    "animation_random": {
+        "description": "Shows an animation, based on some coordinates within a random range, relative to an instance.",
+        "tags": [
+            "animation"
+        ],
+        "params": [
+            {
+                "name": "Target",
+                "type": "instance",
+                "description": "The targeting instance to display the animation on."
+            },
+            {
+                "name": "Animation",
+                "type": "asset",
+                "description": "The animation sprite asset."
+            },
+            {
+                "name": "X Min",
+                "type": "number",
+                "description": "The minimum x coordinate, relative to the instance, in pixels"
+            },
+            {
+                "name": "X Max",
+                "type": "number",
+                "description": "The maximum x coordinate, relative to the instance, in pixels"
+            },
+            {
+                "name": "Y Min",
+                "type": "number",
+                "description": "The minimum y coordinate, relative to the instance, in pixels"
+            },
+            {
+                "name": "Y Max",
+                "type": "number",
+                "description": "The maximum y coordinate, relative to the instance, in pixels"
+            }
+        ],
+        "example": {
+            "code": "sound(sfx_explosion)\nanimation_random(o_mon_bomb, s_explosion, -40, 40, -10, 30)\nwait(0.1)\nsound(sfx_explosion)\nanimation_random(o_mon_bomb, s_explosion, -40, 40, -10, 30)\nwait(0.1)\nsound(sfx_explosion)\nanimation_random(o_mon_bomb, s_explosion, -40, 40, -10, 30)",
+            "description": "Plays three explosion sound effects and shows three random explosion animations around an o_mon_bomb instance."
+        }
+    },
+    "animation_at": {
+        "description": "Displays an animation at specific tile coordinates",
+        "tags": [
+            "animation"
+        ],
+        "params": [
+            {
+                "name": "X",
+                "type": "number",
+                "description": "The x tile coordinate."
+            },
+            {
+                "name": "Y",
+                "type": "number",
+                "description": "The y tile coordinate."
+            },
+            {
+                "name": "Animation",
+                "type": "asset",
+                "description": "The animation sprite asset."
+            }
+        ]
+    },
+    "autosave": {
+        "description": "Triggers an autosave.",
+        "tags": [
+            "save"
+        ],
+        "params": []
+    },
+    "block_input": {
+        "description": "Enables or disables a total input block. While input is blocked, the game has a mock letterbox effect to indicate a cutscene is in-progress. No player may move or open a menu.",
+        "tags": [
+            "control"
+        ],
+        "params": [
+            {
+                "name": "Blocked",
+                "type": "boolean",
+                "description": "Whether or not to block input."
+            }
+        ]
+    },
+    "block_control": {
+        "description": "Enables or disables control input. This only affects the triggering character, and does not display the letterbox effect.",
+        "tags": [
+            "control"
+        ],
+        "params": [
+            {
+                "name": "Blocked",
+                "type": "boolean",
+                "description": "Whether or not to block input."
+            }
+        ]
+    },
+    "branch": {
+        "description": "Branches control flow and jumps to a label if a variable is a particular value",
+        "tags": [
+            "control_flow"
+        ],
+        "params": [
+            {
+                "name": "Variable",
+                "type": "variable",
+                "description": "The variable name to check"
+            },
+            {
+                "name": "Value",
+                "type": "value",
+                "description": "A variable value to compare against"
+            },
+            {
+                "name": "Label",
+                "type": "label",
+                "description": "A label to jump to, if the variable matches the value."
+            }
+        ],
+        "example": {
+            "code": "branch(arkor_night, true, night)\nshow_message(\"Welcome to Arkor Air! We're a bit occupied but try back later tonight.\", Birdkeeper)\ngoto(end)\n:night\nshow_message(\"Welcome! Have a message to send? Our birds can go all over Alcuria!\", Birdkeeper)\n:end",
+            "description": "If the `arkor_night` variable hasn't yet been set or isn't `true`, the message telling the player to come back later appears. Otherwise, if `arkor_night` been set to `true`, the welcome message appears."
+        }
+    },
+    "branch_augment_missing": {
+        "description": "Branches control flow and jumps to a label if an augment is missing.",
+        "tags": [
+            "control_flow",
+            "skills"
+        ],
+        "params": [
+            {
+                "name": "Augment ID",
+                "type": "id",
+                "description": "The augment identifier to check against."
+            },
+            {
+                "name": "Label",
+                "type": "label",
+                "description": "A label to jump to, if the augment is missing."
+            }
+        ]
+    },
+    "branch_augment_exists": {
+        "description": "Branches control flow and jumps to a label if an augment is active for the skill instance.",
+        "tags": [
+            "control_flow",
+            "skills"
+        ],
+        "params": [
+            {
+                "name": "Augment ID",
+                "type": "id",
+                "description": "The augment identifier to check against."
+            },
+            {
+                "name": "Label",
+                "type": "label",
+                "description": "A label to jump to, if the augment is equipped."
+            }
+        ]
+    },
+    "": {
+        "description": "",
+        "tags": [
+            ""
+        ],
+        "params": [
+            {
+                "name": "",
+                "type": "",
+                "description": ""
+            }
+        ]
+    },
+}
